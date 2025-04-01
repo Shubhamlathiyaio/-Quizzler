@@ -1,5 +1,5 @@
 class Quetion {
   final String quetion;
-  final String answer;
+  final bool answer;
   Quetion({required this.quetion, required this.answer});
 }
