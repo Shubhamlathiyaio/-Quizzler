@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         closeFunction: () => reset(context),
         image: FaIcon(
           FontAwesomeIcons.medal,
-          color: Color(0xfff7cf00),
+          color: golden,
           size: 72,
         ),
         context: context,
