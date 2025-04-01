@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:iconify_flutter/icons/zondicons.dart';
-import 'package:quizzler/commons/common_button.dart';
 import 'package:quizzler/commons/common_chip.dart';
 import 'package:quizzler/commons/common_icon_text.dart';
 import 'package:quizzler/commons/common_spacing.dart';
 import 'package:quizzler/commons/common_text.dart';
-import 'package:quizzler/models/quetion.dart';
 import 'package:quizzler/models/quizz_brain.dart';
-import 'package:quizzler/pages/result.dart';
 import 'package:quizzler/resources/COLORS.dart';
 import 'package:quizzler/resources/consts.dart';
-import 'package:quizzler/resources/media_query_helper.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 QuizzBrain quizBrain = QuizzBrain();
@@ -26,8 +20,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Icon> scoreKeeper = [];
-
-  bool canClick = true;
 
   void reset(BuildContext context) {
     scoreKeeper = [];
@@ -72,7 +64,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var mqh = MediaQueryHelper(context);
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
@@ -82,55 +73,47 @@ class _HomePageState extends State<HomePage> {
           )),
       backgroundColor: bg,
       body: Center(
-        child: !canClick
-            ? CircularProgressIndicator(
-                color: Colors.white,
-              )
-            : Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(flex: 2, child: w12),
-                    Expanded(
-                      flex: 4,
-                      child: Center(
-                        child: CommonText(
-                          data: quizBrain.getQuetion(),
-                          textAlign: TextAlign.center,
-                          fontColor: Colors.white,
-                          fontSize: 26,
-                        ),
-                      ),
-                    ),
-                    h50,
-                    customBotton("YES", Colors.green, () {
-                      if (canClick) {
-                        scoreKeeper.add(quizBrain.getAnswer() ? v : x);
-                        next(context);
-                      }
-                    }),
-                    h12,
-                    customBotton("No", Colors.red, () {
-                      if (canClick) {
-                        scoreKeeper.add(quizBrain.getAnswer() ? x : v);
-                        next(context);
-                      }
-                    }),
-                    h12,
-                    h10,
-                    CommonChip(
-                      height: 50,
-                      radius: 5,
-                      child: Wrap(
-                        children: scoreKeeper,
-                      ),
-                    ),
-                    h10,
-                  ],
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(flex: 2, child: w12),
+              Expanded(
+                flex: 4,
+                child: Center(
+                  child: CommonText(
+                    data: quizBrain.getQuetion(),
+                    textAlign: TextAlign.center,
+                    fontColor: Colors.white,
+                    fontSize: 26,
+                  ),
                 ),
               ),
+              h50,
+              customBotton("YES", Colors.green, () {
+                scoreKeeper.add(quizBrain.getAnswer() ? v : x);
+                next(context);
+              }),
+              h12,
+              customBotton("No", Colors.red, () {
+                scoreKeeper.add(quizBrain.getAnswer() ? x : v);
+                next(context);
+              }),
+              h12,
+              h10,
+              CommonChip(
+                height: 50,
+                radius: 5,
+                child: Wrap(
+                  children: scoreKeeper,
+                ),
+              ),
+              h10,
+            ],
+          ),
+        ),
       ),
     );
   }

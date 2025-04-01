@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:quizzler/models/quetion.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 class QuizzBrain {
   int _quetionNumber = 0;
-  List<Quetion> _quetions = [
+  final List<Quetion> _quetions = [
     Quetion(quetion: "🌍 Is the Earth round?", answer: true),
     Quetion(quetion: "🔥 Can fire be cold?", answer: false),
     Quetion(quetion: "🐱 Do cats have nine lives?", answer: false),

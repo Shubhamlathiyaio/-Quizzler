@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:quizzler/pages/home_page.dart';
-import 'package:quizzler/pages/result.dart';
 
 void main() => runApp(MainApp());
 
